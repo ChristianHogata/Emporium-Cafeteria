@@ -1,0 +1,42 @@
+unit Sistema.View.Helpers.TColumn;
+
+interface
+
+uses
+  Vcl.StdCtrls, Data.DB, Vcl.DBCtrls, System.SysUtils, Vcl.DBGrids;
+
+type
+  TViewHelperTColumn = class helper for TColumn
+  private
+    procedure FloatFieldGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+  public
+    procedure AdicionarFormatacaoFloat(pColumn: TColumn);
+  end;
+
+implementation
+
+uses
+  System.Variants;
+
+
+{ TViewHelperTColumn }
+
+
+
+procedure TViewHelperTColumn.FloatFieldGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  Text := FormatFloat('0.00', Sender.AsFloat);
+end;
+
+{ TViewHelperTColumn }
+
+procedure TViewHelperTColumn.AdicionarFormatacaoFloat(pColumn: TColumn);
+begin
+  if (pColumn.Field.DataType <> ftFloat) then
+    exit;
+
+  if not VarIsEmpty(pColumn.Field.Value) then
+    pColumn.Field.OnGetText := FloatFieldGetText;
+end;
+
+end.

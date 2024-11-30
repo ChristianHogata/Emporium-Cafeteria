@@ -1,0 +1,2 @@
+No config.Ini, apontar dll do Postgres versão 16, a mesma se encontra no caminho: assets > DB > lib.
+Rodar o Dump do banco de dados que se encontra no caminho: assets > DB.

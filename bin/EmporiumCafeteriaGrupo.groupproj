@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C9E45479-F4BF-450C-A900-3966E454CB9E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\assets\pacotes\EmporiumPack.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EmporiumCafeteria.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="EmporiumPack">
+        <MSBuild Projects="..\assets\pacotes\EmporiumPack.dproj"/>
+    </Target>
+    <Target Name="EmporiumPack:Clean">
+        <MSBuild Projects="..\assets\pacotes\EmporiumPack.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EmporiumPack:Make">
+        <MSBuild Projects="..\assets\pacotes\EmporiumPack.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EmporiumCafeteria">
+        <MSBuild Projects="EmporiumCafeteria.dproj"/>
+    </Target>
+    <Target Name="EmporiumCafeteria:Clean">
+        <MSBuild Projects="EmporiumCafeteria.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EmporiumCafeteria:Make">
+        <MSBuild Projects="EmporiumCafeteria.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="EmporiumPack;EmporiumCafeteria"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="EmporiumPack:Clean;EmporiumCafeteria:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="EmporiumPack:Make;EmporiumCafeteria:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
